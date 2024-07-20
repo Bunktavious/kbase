@@ -1,0 +1,45 @@
+/* styles.css */
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.content {
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+li {
+    cursor: pointer;
+}
+
+li ul {
+    display: none;
+}
+
+li.active ul {
+    display: block;
+}
