@@ -17,7 +17,6 @@ body {
     width: 50px;
     height: auto;
     margin-right: 20px;
-    border: 1px solid white; /* Add this line for testing visibility */
 }
 
 .title {
