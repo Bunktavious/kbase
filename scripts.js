@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(item => {
         item.addEventListener('click', (event) => {
             event.stopPropagation();
-            item.classList.toggle('active');
+            item.querySelectorAll(':scope > ul').forEach(ul => {
+                ul.classList.toggle('active');
+            });
         });
     });
 });
