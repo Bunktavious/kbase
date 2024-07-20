@@ -5,6 +5,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    font-size: 150%; /* Increase font size by 50% */
 }
 
 .header {
@@ -17,7 +18,6 @@ body {
     width: 156px;
     height: auto;
     margin-right: 20px;
-
 }
 
 .title {
@@ -41,6 +41,15 @@ li ul {
     display: none;
 }
 
-li.active ul {
+li ul.active {
     display: block;
+}
+
+a {
+    color: #00f; /* Brighter blue */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
