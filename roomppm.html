@@ -7,6 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -30,17 +32,25 @@
         .container {
             display: flex;
             width: 100%;
+            max-width: 1080px;
+            margin: 20px;
         }
 
         .left-frame {
-            width: 50%;
-            height: 100vh;
+            width: 48%;
+            height: 600px;
+            border: 2px solid white;
+            margin-right: 4%;
+            box-sizing: border-box;
         }
 
         .right-panel {
-            width: 50%;
-            padding: 20px;
+            width: 48%;
+            border: 2px solid white;
+            height: 600px;
             overflow-y: auto;
+            box-sizing: border-box;
+            position: relative;
         }
 
         .label-row {
@@ -50,6 +60,18 @@
         .label-row button {
             margin-right: 10px;
             padding: 5px 10px;
+        }
+
+        .close-btn {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            background-color: #e53935;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
         iframe {
@@ -70,6 +92,7 @@
         </div>
         <div class="right-panel" id="right-panel">
             <!-- Labels and buttons will be generated here -->
+            <button class="close-btn" id="close-btn">Close</button>
         </div>
     </div>
 
@@ -77,6 +100,7 @@
         const labels = Array.from({ length: 66 }, (_, i) => `Label ${i + 1}`);
 
         const rightPanel = document.getElementById('right-panel');
+        const closeButton = document.getElementById('close-btn');
         
         labels.forEach((label, index) => {
             const row = document.createElement('div');
@@ -108,11 +132,24 @@
                 issueFrame.src = 'https://docs.google.com/spreadsheets/d/1wsq7I67470SPlEx4d7mSCz8nLaJwzTl3Em_VwPgYtqI/edit?gid=827009410#gid=827009410'; // Modify with specific sheet and column
                 rightPanel.innerHTML = '';  // Clear previous content
                 rightPanel.appendChild(issueFrame);
+                closeButton.style.display = 'block';
             };
             row.appendChild(btnViewIssues);
 
             rightPanel.appendChild(row);
         });
-    </script>
-</body>
-</html>
+
+        closeButton.onclick = () => {
+            rightPanel.innerHTML = ''; // Clear the iframe and labels
+            labels.forEach((label, index) => {
+                const row = document.createElement('div');
+                row.className = 'label-row';
+                
+                const labelText = document.createElement('span');
+                labelText.textContent = label;
+                row.appendChild(labelText);
+
+                const btn1Month = document.createElement('button');
+                btn1Month.textContent = '1 Month';
+                btn1Month.onclick = () => window.open('https://google.com'); // replace with your Google Form link
+                row.appendChild(bt
