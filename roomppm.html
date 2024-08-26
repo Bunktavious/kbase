@@ -119,17 +119,17 @@
 
                 const btn1Month = document.createElement('button');
                 btn1Month.textContent = '1 Month';
-                btn1Month.onclick = () => window.open('https://google.com'); // replace with your Google Form link
+                btn1Month.onclick = () => loadForm('https://your-google-form-link-1'); // replace with your Google Form link
                 row.appendChild(btn1Month);
 
                 const btn6Month = document.createElement('button');
                 btn6Month.textContent = '6 Month';
-                btn6Month.onclick = () => window.open('https://google.com'); // replace with your Google Form link
+                btn6Month.onclick = () => loadForm('https://your-google-form-link-2'); // replace with your Google Form link
                 row.appendChild(btn6Month);
 
                 const btnAddIssue = document.createElement('button');
                 btnAddIssue.textContent = 'Add Issue';
-                btnAddIssue.onclick = () => window.open('https://google.com'); // replace with your Google Form link
+                btnAddIssue.onclick = () => loadForm('https://your-google-form-link-3'); // replace with your Google Form link
                 row.appendChild(btnAddIssue);
 
                 const btnViewIssues = document.createElement('button');
@@ -146,6 +146,15 @@
 
                 rightPanel.appendChild(row);
             });
+        }
+
+        function loadForm(formUrl) {
+            const formFrame = document.createElement('iframe');
+            formFrame.src = formUrl;
+            rightPanel.innerHTML = '';  // Clear previous content
+            rightPanel.appendChild(formFrame);
+            rightPanel.appendChild(closeButton);
+            closeButton.style.display = 'block';
         }
 
         loadButtons();  // Load the buttons when the page loads
