@@ -18,39 +18,47 @@
 
         header {
             width: 100%;
-            background-color: #283593;
+            background-color: black;
             color: white;
             padding: 15px;
-            text-align: center;
+            display: flex;
+            align-items: center;
         }
 
         header img {
             height: 50px;
-            vertical-align: left;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            margin: 0;
         }
 
         .container {
             display: flex;
             width: 100%;
-            max-width: 1080px;
+            max-width: 1620px; /* 50% wider than before */
             margin: 20px;
         }
 
         .left-frame {
-            width: 48%;
-            height: 600px;
+            width: 72%;
+            height: 660px; /* 10% taller than before */
             border: 2px solid white;
             margin-right: 4%;
             box-sizing: border-box;
         }
 
         .right-panel {
-            width: 48%;
+            width: 24%;
+            height: 660px; /* 10% taller than before */
+            background-color: white;
             border: 2px solid white;
-            height: 600px;
             overflow-y: auto;
             box-sizing: border-box;
             position: relative;
+            color: black; /* Set the text color in the right panel to black */
+            padding: 10px;
         }
 
         .label-row {
@@ -60,6 +68,14 @@
         .label-row button {
             margin-right: 10px;
             padding: 5px 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .label-row button:hover {
+            background-color: #555;
         }
 
         .close-btn {
@@ -119,7 +135,7 @@
 
                 const btn1Month = document.createElement('button');
                 btn1Month.textContent = '1 Month';
-                btn1Month.onclick = () => loadForm('https://docs.google.com/forms/d/e/1FAIpQLScIYaphYT_7MMnU7am1LcvjsewVTphi9eo2H2h-PGeRCwZTVw/viewform?usp=pp_url&entry.807256882=P-Trap+and+Drain+cleaning&entry.807256882=Loose+fittings+check+-tap,+shower,+shelves,+hooks,+sliding+door,+door+stops,+toilets,+etc&entry.807256882=Aerator+cleaning&entry.807256882=Bathroom+Fan+cleaning&entry.807256882=Lubing+door+hinges+and+handles,+sliding+door&entry.1551252465=Door+Batteries&entry.1708520460=Darren'); // replace with your Google Form link
+                btn1Month.onclick = () => loadForm('https://your-google-form-link-1'); // replace with your Google Form link
                 row.appendChild(btn1Month);
 
                 const btn6Month = document.createElement('button');
