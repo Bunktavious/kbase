@@ -37,20 +37,20 @@
         .container {
             display: flex;
             width: 100%;
-            max-width: 1420px; /* 50% wider than before */
+            max-width: 1440px; /* Adjusted for better screen utilization */
             margin: 20px;
         }
 
         .left-frame {
-            width: 72%;
+            width: 66%; /* Adjusted width to 66% */
             height: 660px; /* 10% taller than before */
             border: 2px solid white;
-            margin-right: 4%;
+            margin-right: 2%; /* Adjusted margin */
             box-sizing: border-box;
         }
 
         .right-panel {
-            width: 24%;
+            width: 32%; /* Adjusted width to 32% */
             height: 660px; /* 10% taller than before */
             background-color: white;
             border: 2px solid white;
@@ -63,15 +63,22 @@
 
         .label-row {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
         }
 
         .label-row button {
-            margin-right: 10px;
             padding: 5px 10px;
             background-color: black;
             color: white;
             border: none;
             cursor: pointer;
+            flex-grow: 1; /* Ensure buttons fill available space */
+            margin-right: 5px;
+        }
+
+        .label-row button:last-child {
+            margin-right: 0;
         }
 
         .label-row button:hover {
@@ -100,80 +107,4 @@
 <body>
     <header>
         <img src="https://bunktavious.github.io/kbase/img/logo.png" alt="Logo">
-        <h1>Room PPM Tracking</h1>
-    </header>
-    <div class="container">
-        <div class="left-frame">
-            <iframe src="https://docs.google.com/spreadsheets/d/1wsq7I67470SPlEx4d7mSCz8nLaJwzTl3Em_VwPgYtqI/edit?gid=827009410#gid=827009410"></iframe>
-        </div>
-        <div class="right-panel" id="right-panel">
-            <!-- Labels and buttons will be generated here -->
-        </div>
-    </div>
-
-    <script>
-        const labels = Array.from({ length: 66 }, (_, i) => `Label ${i + 1}`);
-
-        const rightPanel = document.getElementById('right-panel');
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-btn';
-        closeButton.textContent = 'Close';
-        closeButton.onclick = () => {
-            rightPanel.innerHTML = '';  // Clear the iframe and reload the labels and buttons
-            loadButtons();
-            closeButton.style.display = 'none'; // Hide the close button
-        };
-
-        function loadButtons() {
-            labels.forEach((label, index) => {
-                const row = document.createElement('div');
-                row.className = 'label-row';
-                
-                const labelText = document.createElement('span');
-                labelText.textContent = label;
-                row.appendChild(labelText);
-
-                const btn1Month = document.createElement('button');
-                btn1Month.textContent = '1 Month';
-                btn1Month.onclick = () => loadForm('https://your-google-form-link-1'); // replace with your Google Form link
-                row.appendChild(btn1Month);
-
-                const btn6Month = document.createElement('button');
-                btn6Month.textContent = '6 Month';
-                btn6Month.onclick = () => loadForm('https://your-google-form-link-2'); // replace with your Google Form link
-                row.appendChild(btn6Month);
-
-                const btnAddIssue = document.createElement('button');
-                btnAddIssue.textContent = 'Add Issue';
-                btnAddIssue.onclick = () => loadForm('https://your-google-form-link-3'); // replace with your Google Form link
-                row.appendChild(btnAddIssue);
-
-                const btnViewIssues = document.createElement('button');
-                btnViewIssues.textContent = 'View Issues';
-                btnViewIssues.onclick = () => {
-                    const issueFrame = document.createElement('iframe');
-                    issueFrame.src = 'https://docs.google.com/spreadsheets/d/1wsq7I67470SPlEx4d7mSCz8nLaJwzTl3Em_VwPgYtqI/edit?gid=827009410#gid=827009410'; // Modify with specific sheet and column
-                    rightPanel.innerHTML = '';  // Clear previous content
-                    rightPanel.appendChild(issueFrame);
-                    rightPanel.appendChild(closeButton);
-                    closeButton.style.display = 'block';
-                };
-                row.appendChild(btnViewIssues);
-
-                rightPanel.appendChild(row);
-            });
-        }
-
-        function loadForm(formUrl) {
-            const formFrame = document.createElement('iframe');
-            formFrame.src = formUrl;
-            rightPanel.innerHTML = '';  // Clear previous content
-            rightPanel.appendChild(formFrame);
-            rightPanel.appendChild(closeButton);
-            closeButton.style.display = 'block';
-        }
-
-        loadButtons();  // Load the buttons when the page loads
-    </script>
-</body>
-</html>
+ 
