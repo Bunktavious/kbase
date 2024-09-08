@@ -111,13 +111,15 @@
     </header>
     <div class="container">
         <div class="left-frame">
-            <iframe src="https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=0#gid=0"></iframe>
+            <iframe id="leftIframe" src="https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=0#gid=0"></iframe>
             <button id="closeLeftIframe" style="display:none;">Close Issues Display</button>
         </div>
         <div class="right-panel" id="right-panel">
             <!-- Labels and buttons will be generated here -->
         </div>
     </div>
+
+
 
     <script>
         // Array of labels from the label.txt file
@@ -217,26 +219,26 @@ function loadButtons() {
 // Store the original URL for the left iframe
 const originalLeftIframeUrl = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=0#gid=0'; // The original Google Sheets URL
 
-// Get references to the elements
-const leftIframe = document.querySelector('.left-frame iframe');
+// Get references to the iframe and close button elements
+const leftIframe = document.getElementById('leftIframe');
 const closeLeftIframeButton = document.getElementById('closeLeftIframe');
 
-// When View Issues button is clicked
+// When the View Issues button is clicked, load the Issues Display
 function loadIssuesDisplay() {
-    // Load the Issues Display sheet
+    // Load the Issues Display sheet in the left iframe
     const issuesSheetUrl = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424';
     leftIframe.src = issuesSheetUrl;
-    
+
     // Show the Close button
     closeLeftIframeButton.style.display = 'block';
 }
 
-// Handle closing the iframe
+// Handle closing the Issues Display and resetting to the original URL
 closeLeftIframeButton.onclick = function() {
     // Reset the iframe back to the original URL
     leftIframe.src = originalLeftIframeUrl;
 
-    // Hide the Close button
+    // Hide the Close button again
     closeLeftIframeButton.style.display = 'none';
 }
 
