@@ -142,45 +142,64 @@
             closeButton.style.display = 'none'; // Hide the close button
         };
 
-        function loadButtons() {
-            labels.forEach((label) => {
-                const row = document.createElement('div');
-                row.className = 'label-row';
-                
-                const labelText = document.createElement('span');
-                labelText.textContent = label;
-                row.appendChild(labelText);
+function loadFormAndSubmit(formUrl) {
+    const formFrame = document.createElement('iframe');
+    formFrame.src = formUrl;
+    formFrame.style.display = 'none';  // Hide the iframe, as we only want the form to auto-submit
+    document.body.appendChild(formFrame);
 
-                const btn1Month = document.createElement('button');
-                btn1Month.textContent = '1 Month';
-                btn1Month.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSf7VYhFE_MaEuh5mcIceeHsWPgIXpNqfUYrj0OD3zZ4Khvq-Q/viewform?usp=pp_url&entry.282804859=${label}`);
-                row.appendChild(btn1Month);
+    // Optionally remove the iframe after submission (give it a delay to ensure it submits)
+    setTimeout(() => {
+        document.body.removeChild(formFrame);
+    }, 5000);  // Adjust this delay as needed
+}
 
-                const btn6Month = document.createElement('button');
-                btn6Month.textContent = '6 Month';
-                btn6Month.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSfwHscrXxCn8xVWLtsb56JiJYETVIknBeASyMkiaX5yhE1wfA/viewform?usp=pp_url&entry.1111653523=${label}`);
-                row.appendChild(btn6Month);
+// Updated View Issues button with auto-submit
+function loadButtons() {
+    labels.forEach((label) => {
+        const row = document.createElement('div');
+        row.className = 'label-row';
+        
+        const labelText = document.createElement('span');
+        labelText.textContent = label;
+        row.appendChild(labelText);
 
-                const btnAddIssue = document.createElement('button');
-                btnAddIssue.textContent = 'Add Issue';
-                btnAddIssue.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSf2ZA57zzm4Yo7LuAp4GTKFcpSPOfPqGflIyTqDP6Y-Atbz4g/viewform?usp=pp_url&entry.1705674782=${label}`);
-                row.appendChild(btnAddIssue);
+        const btn1Month = document.createElement('button');
+        btn1Month.textContent = '1 Month';
+        btn1Month.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSf7VYhFE_MaEuh5mcIceeHsWPgIXpNqfUYrj0OD3zZ4Khvq-Q/viewform?usp=pp_url&entry.282804859=${label}`);
+        row.appendChild(btn1Month);
 
-                const btnViewIssues = document.createElement('button');
-                btnViewIssues.textContent = 'View Issues';
-                btnViewIssues.onclick = () => {
-                    const issueFrame = document.createElement('iframe');
-                    issueFrame.src = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424#gid=1317373424'; // Link to provided Google Sheet
-                    rightPanel.innerHTML = '';  // Clear previous content
-                    rightPanel.appendChild(issueFrame);
-                    rightPanel.appendChild(closeButton);
-                    closeButton.style.display = 'block';
-                };
-                row.appendChild(btnViewIssues);
+        const btn6Month = document.createElement('button');
+        btn6Month.textContent = '6 Month';
+        btn6Month.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSfwHscrXxCn8xVWLtsb56JiJYETVIknBeASyMkiaX5yhE1wfA/viewform?usp=pp_url&entry.1111653523=${label}`);
+        row.appendChild(btn6Month);
 
-                rightPanel.appendChild(row);
-            });
-        }
+        const btnAddIssue = document.createElement('button');
+        btnAddIssue.textContent = 'Add Issue';
+        btnAddIssue.onclick = () => loadForm(`https://docs.google.com/forms/d/e/1FAIpQLSf2ZA57zzm4Yo7LuAp4GTKFcpSPOfPqGflIyTqDP6Y-Atbz4g/viewform?usp=pp_url&entry.1705674782=${label}`);
+        row.appendChild(btnAddIssue);
+
+        const btnViewIssues = document.createElement('button');
+        btnViewIssues.textContent = 'View Issues';
+        btnViewIssues.onclick = () => {
+            // Auto-submit the form when this button is pressed
+            const preFilledFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdraUDp6u-Tu1Yh9iBecdM-PZ9GjBp1Yexc5SYKQbTJYsb1cQ/viewform?usp=pp_url&entry.1555837926=${label}`;
+            loadFormAndSubmit(preFilledFormUrl);
+
+            // Also display the issues in the iframe
+            const issueFrame = document.createElement('iframe');
+            issueFrame.src = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424#gid=1317373424'; // Link to provided Google Sheet
+            rightPanel.innerHTML = '';  // Clear previous content
+            rightPanel.appendChild(issueFrame);
+            rightPanel.appendChild(closeButton);
+            closeButton.style.display = 'block';
+        };
+        row.appendChild(btnViewIssues);
+
+        rightPanel.appendChild(row);
+    });
+}
+
 
         function loadForm(formUrl) {
             const formFrame = document.createElement('iframe');
