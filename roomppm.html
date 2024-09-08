@@ -214,6 +214,33 @@ function loadButtons() {
         }
 
         loadButtons();  // Load the buttons when the page loads
+// Store the original URL for the left iframe
+const originalLeftIframeUrl = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=0#gid=0'; // The original Google Sheets URL
+
+// Get references to the elements
+const leftIframe = document.querySelector('.left-frame iframe');
+const closeLeftIframeButton = document.getElementById('closeLeftIframe');
+
+// When View Issues button is clicked
+function loadIssuesDisplay() {
+    // Load the Issues Display sheet
+    const issuesSheetUrl = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424';
+    leftIframe.src = issuesSheetUrl;
+    
+    // Show the Close button
+    closeLeftIframeButton.style.display = 'block';
+}
+
+// Handle closing the iframe
+closeLeftIframeButton.onclick = function() {
+    // Reset the iframe back to the original URL
+    leftIframe.src = originalLeftIframeUrl;
+
+    // Hide the Close button
+    closeLeftIframeButton.style.display = 'none';
+}
+
+        
     </script>
 </body>
 </html>
