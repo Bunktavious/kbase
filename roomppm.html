@@ -182,17 +182,19 @@ function loadButtons() {
         const btnViewIssues = document.createElement('button');
         btnViewIssues.textContent = 'View Issues';
         btnViewIssues.onclick = () => {
-            // Auto-submit the form when this button is pressed
-            const preFilledFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdraUDp6u-Tu1Yh9iBecdM-PZ9GjBp1Yexc5SYKQbTJYsb1cQ/viewform?usp=pp_url&entry.1555837926=${label}`;
-            loadFormAndSubmit(preFilledFormUrl);
-
-            // Also display the issues in the iframe
-            const issueFrame = document.createElement('iframe');
-            issueFrame.src = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424#gid=1317373424'; // Link to provided Google Sheet
+            // Load pre-filled form in the right panel
+            const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdraUDp6u-Tu1Yh9iBecdM-PZ9GjBp1Yexc5SYKQbTJYsb1cQ/viewform?usp=pp_url&entry.1555837926=${label}`;
+            const formFrame = document.createElement('iframe');
+            formFrame.src = formUrl;
             rightPanel.innerHTML = '';  // Clear previous content
-            rightPanel.appendChild(issueFrame);
+            rightPanel.appendChild(formFrame);
             rightPanel.appendChild(closeButton);
             closeButton.style.display = 'block';
+
+            // Load the Issues Display sheet in the left panel
+            const issuesSheetUrl = 'https://docs.google.com/spreadsheets/d/1pOK-wGKxWI15Jf5UfyYhfJvsTjNfyceWP9rPDfdVHCg/edit?gid=1317373424';  // Link to "Issues Display" sheet
+            const issuesFrame = document.querySelector('.left-frame iframe');
+            issuesFrame.src = issuesSheetUrl;  // Load the Google Sheet into the left iframe
         };
         row.appendChild(btnViewIssues);
 
